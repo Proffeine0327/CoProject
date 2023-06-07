@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Player player { get; private set; }
+    public static Player instance { get; private set; }
 
-    [SerializeField] private float movespeed;
+    [SerializeField] private float moveSpeed;
 
-    private Rigidbody2D rb2d;
+    private Rigidbody2D rb;
 
     private void Awake() 
     {
-        player = this;
+        instance = this;
+
+        rb = GetComponent<Rigidbody2D>();    
     }
 
-    private void Update()
+    private void Update() 
     {
         Move();
     }
 
     private void Move()
     {
-        var h = Input.GetAxisRaw("Horizontal");    
+        var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
-        var dir = new Vector2(h, v).normalized;
 
-        transform.Translate(dir * Time.deltaTime * movespeed);
+        rb.velocity = new Vector2(h, v).normalized * moveSpeed;
     }
 }
