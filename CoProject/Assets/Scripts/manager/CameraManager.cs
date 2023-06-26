@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Rect cameraClamp;
     [SerializeField] private Transform target;
     [SerializeField] private float followSpeed;
 
@@ -15,18 +14,12 @@ public class CameraManager : MonoBehaviour
         cam = GetComponent<Camera>();    
     }
 
-    private void Update() 
+    private void LateUpdate() 
     {
-        var height = cam.orthographicSize;
-        var width = height * Screen.width / Screen.height;
+        // var height = cam.orthographicSize;
+        // var width = height * Screen.width / Screen.height;
 
         transform.position = Vector3.Lerp(transform.position, target.position, followSpeed * Time.deltaTime);
-
-        transform.position = new Vector3
-        (
-            Mathf.Clamp(transform.position.x, cameraClamp.x + width, cameraClamp.x + cameraClamp.width - width),
-            Mathf.Clamp(transform.position.y, cameraClamp.y + height, cameraClamp.y + cameraClamp.height - height),
-            -10
-        );
+        transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 }
