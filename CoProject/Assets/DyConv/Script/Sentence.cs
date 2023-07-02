@@ -18,17 +18,23 @@ namespace Dialogue
         [SerializeField] private string narrator;
         [SerializeField] private string text = " ";
         [SerializeField] private SentenceType type;
-        [SerializeField] private List<NextSentenceInfo> nexts = new List<NextSentenceInfo>();
         [SerializeField] private Sprite sprite;
-        [SerializeField] private TimelineAsset playable;
+        [SerializeField] private bool isPlayTimeline;
+        [SerializeField] private Vector2 betweenTime;
+        [SerializeField] private DirectorWrapMode wrapMode;
         [SerializeField] private float passTime;
 
-        public string Narrator { get { return narrator; } }
-        public string Text { get { return text; } }
+        public string Narrator => narrator;
+        public string Text => text;
         public SentenceType Type { get { return type; } set { type = value; } }
-        public List<NextSentenceInfo> Nexts { get { return nexts; } }
-        public Sprite Sprite { get { return sprite; } }
+        public Sprite Sprite => sprite;
+        public bool IsPlayTimeline => isPlayTimeline;
+        public Vector2 BetweenTime => betweenTime;
+        public DirectorWrapMode WrapMode => wrapMode;
+        public float PassTime => passTime;
 
+        [SerializeField] private List<NextSentenceInfo> nexts = new List<NextSentenceInfo>();
+        public List<NextSentenceInfo> Nexts => nexts;
 #if UNITY_EDITOR
         public Rect rect;
         public GUIStyle normalStyle;
@@ -78,7 +84,11 @@ namespace Dialogue
             var str = Type == SentenceType.start ? "start" : Text.Substring(0, Mathf.Min(Text.Length, 25)).Replace('\n', '\0');
 
             if(Type == SentenceType.displayPlayable)
+            {
                 str = $"Memo : {str}";
+                normalStyle.normal.textColor = Color.yellow;
+                selectedStyle.normal.textColor = Color.yellow;
+            }
             GUI.Box(rect, str, isSelected ? selectedStyle : normalStyle);
         }
 

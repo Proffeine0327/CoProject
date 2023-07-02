@@ -1,21 +1,128 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using Dialogue;
+using TMPro;
 
 public class SequenceManager : MonoBehaviour
 {
-    public SequenceManager instance { get; private set; }
+    private static SequenceManager instance;
 
-    private void Awake() 
+    public static bool isPlayingSequence => instance.current != null;
+    public static void StartSequence(Situation situation)
+    {
+        situation.StartDialogue();
+        instance.current = situation;
+        instance.bg.SetActive(true);
+        instance.pd.playableAsset = situation.playable;
+
+        instance.StartCoroutine(instance.ContinueSequence());
+    }
+    
+
+    [Header("ref")]
+    [SerializeField] private GameObject bg;
+    [SerializeField] private TextMeshProUGUI speaker;
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private Image image;
+    [Header("var")]
+    [SerializeField] private int textAnimationSpeed;
+    [Header("start")]
+    [SerializeField] private Situation situation;
+
+    private PlayableDirector pd;
+    private Situation current;
+    private Coroutine pdmanager;
+
+    private void Awake()
     {
         instance = this;
+
+        pd = GetComponent<PlayableDirector>();
+
+        StartSequence(situation);
     }
 
-    private void Start() 
+    public IEnumerator ContinueSequence()
     {
-        var pd = GetComponent<PlayableDirector>();
-        pd.time = 5;
+        while (true)
+        {
+            speaker.text = current.currentSentence.Narrator;
+            if (current.currentSentence.Type == SentenceType.normal)
+            {
+                for (int i = 0; i < current.currentSentence.Text.Length; i++)
+                {
+                    text.text = current.currentSentence.Text.Substring(0, i);
+
+                    bool skip = false;
+                    for (float t = 0; t < textAnimationSpeed / 1000f; t += Time.deltaTime)
+                    {
+                        if (Input.GetKeyDown(KeyCode.X))
+                        {
+                            skip = true;
+                            break;
+                        }
+                        yield return null;
+                    }
+                    if (skip) break;
+                }
+                text.text = current.currentSentence.Text;
+
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
+            }
+
+            if (current.canContinue)
+            {
+                if (current.currentSentence.PassTime > 0)
+                {
+                    bg.SetActive(false);
+                    yield return new WaitForSeconds(current.currentSentence.PassTime);
+                    bg.SetActive(true);
+                }
+
+                current.Continue();
+
+                if (current.currentSentence.IsPlayTimeline)
+                {
+                    if (pdmanager != null) StopCoroutine(pdmanager);
+                    pdmanager = StartCoroutine(ManagePlayableDirector(current.currentSentence.BetweenTime, current.currentSentence.WrapMode));
+                }
+            }
+            else break;
+        }
+
+        EndSequence();
+    }
+
+    public void EndSequence()
+    {
+        current = null;
+        pd.Pause();
+        bg.SetActive(false);
+    }
+
+    private IEnumerator ManagePlayableDirector(Vector2 time, DirectorWrapMode mode)
+    {
+        do
+        {
+            pd.Play();
+            pd.time = time.x;
+            yield return new WaitUntil(() => pd.time >= Mathf.Min(time.y, ((float)pd.duration) - 0.001f));
+        }
+        while (mode == DirectorWrapMode.Loop);
+
+        pd.Pause();
+        pd.time =  Mathf.Min(time.y, ((float)pd.duration) - 0.001f);
+
+        if (mode == DirectorWrapMode.None)
+        {
+            pd.Play();
+            pd.time = time.x;
+            yield return null;
+            pd.Pause();
+        }
     }
 }

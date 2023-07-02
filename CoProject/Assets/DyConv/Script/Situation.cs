@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,6 +12,7 @@ namespace Dialogue
     [CreateAssetMenu(menuName = "Dialogue/Situation", fileName = "situation")]
     public class Situation : ScriptableObject
     {
+        public TimelineAsset playable;
         public VariableTable variableTable;
         public Sentence currentSentence;
         public List<Sentence> sentences = new List<Sentence>();

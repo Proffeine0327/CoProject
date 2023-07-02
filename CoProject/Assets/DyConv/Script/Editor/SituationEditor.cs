@@ -11,11 +11,13 @@ public class SituationEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("playable"));
         if(GUILayout.Button("Open Situation Editor"))
         {
             SituationEditorWindow.Open(target as Situation);
             Selection.objects = null;
         }
+        serializedObject.ApplyModifiedProperties();
     }
 }
 #endif
