@@ -28,16 +28,31 @@ namespace Dialogue
             var methodp = info.GetParameters();
             var p = new object[parameters.Count];
             for (int i = 0; i < methodp.Length; i++)
+            {
                 p[i] = Convert.ChangeType(parameters[i].parameterValue, methodp[i].ParameterType);
+
+            }
 
             return info.Invoke(null, p);
         }
     }
 
+    public enum ParamType
+    {
+        Int,
+        Float,
+        String,
+        Object
+    }
+
     [Serializable]
     public class ParamInfo
     {
-        public string parameterValue;
-        public string parameterType;
+        public ParamType parmaType;
+
+        public int intValue;
+        public float floatValue;
+        public string stringValue;
+        public UnityEngine.Object objectRefrenceValue;
     }
 }

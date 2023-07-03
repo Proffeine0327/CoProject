@@ -115,8 +115,8 @@ MonoBehaviour:
   - {fileID: -7584799702853405884}
   rect:
     serializedVersion: 2
-    x: 307
-    y: 31
+    x: 203
+    y: -73
     width: 200
     height: 50
   normalStyle:
@@ -336,13 +336,12 @@ MonoBehaviour:
     methodName: DisplayUI
     openParameter: 1
     parameters:
-    - parameterValue: "\uB9B4\uC874\uC0AC"
+    - parameterValue: "\uC6C0\uC9C1\uC774\uAE30"
       parameterType: System.String
-    - parameterValue: "\uB9B4\uD30C\uB294 \uC2E0 \uADF8 \uC790\uCCB4\uB2E4"
+    - parameterValue: "\uBC29\uD5A5\uD0A4\uB97C \uC774\uC6A9\uD558\uC5EC \uC6C0\uC9C1\uC77C
+        \uC218 \uC788\uC2B5\uB2C8\uB2E4."
       parameterType: System.String
     - parameterValue: 2
-      parameterType: System.Single
-    - parameterValue: 3
       parameterType: System.Single
     - parameterValue: 3
       parameterType: System.Single
@@ -350,8 +349,8 @@ MonoBehaviour:
   nexts: []
   rect:
     serializedVersion: 2
-    x: 513
-    y: 274
+    x: 410
+    y: 169
     width: 200
     height: 50
   normalStyle:
@@ -548,8 +547,8 @@ MonoBehaviour:
   - {fileID: -8293486299764182018}
   rect:
     serializedVersion: 2
-    x: 307
-    y: 393
+    x: 203
+    y: 289
     width: 200
     height: 50
   normalStyle:
@@ -714,8 +713,8 @@ MonoBehaviour:
   - {fileID: 562058863028170800}
   rect:
     serializedVersion: 2
-    x: 306
-    y: 214
+    x: 202
+    y: 110
     width: 200
     height: 50
   normalStyle:
@@ -919,8 +918,8 @@ MonoBehaviour:
   - {fileID: -1135857425736549407}
   rect:
     serializedVersion: 2
-    x: 305
-    y: 449
+    x: 201
+    y: 345
     width: 200
     height: 50
   normalStyle:
@@ -1085,8 +1084,8 @@ MonoBehaviour:
   - {fileID: -5456749795339915548}
   rect:
     serializedVersion: 2
-    x: 514
-    y: 389
+    x: 410
+    y: 285
     width: 200
     height: 50
   normalStyle:
@@ -1287,8 +1286,8 @@ MonoBehaviour:
   - {fileID: -5717482986233709935}
   rect:
     serializedVersion: 2
-    x: 306
-    y: 90
+    x: 202
+    y: -14
     width: 200
     height: 50
   normalStyle:
@@ -1472,8 +1471,8 @@ MonoBehaviour:
   - {fileID: -2634496887123933589}
   rect:
     serializedVersion: 2
-    x: 514
-    y: 447
+    x: 410
+    y: 343
     width: 200
     height: 50
   normalStyle:
@@ -1653,8 +1652,8 @@ MonoBehaviour:
   - {fileID: 75632516398468787}
   rect:
     serializedVersion: 2
-    x: 513
-    y: 336
+    x: 409
+    y: 232
     width: 200
     height: 50
   normalStyle:
@@ -1807,7 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playable: {fileID: 11400000, guid: 96ce12feccf386d4ab7f9a17575dd072, type: 2}
   variableTable: {fileID: 11400000, guid: c7a2aa9737dc1f241a6ca3b72fb808c9, type: 2}
-  currentSentence: {fileID: -6749562186541157915}
+  currentSentence: {fileID: -740397859019578742}
   sentences:
   - {fileID: 1918685214915394262}
   - {fileID: -6749562186541157915}
@@ -1900,8 +1899,8 @@ MonoBehaviour:
   - {fileID: 2356339189672376013}
   rect:
     serializedVersion: 2
-    x: 305
-    y: 333
+    x: 201
+    y: 229
     width: 200
     height: 50
   normalStyle:
@@ -2065,8 +2064,8 @@ MonoBehaviour:
   - {fileID: -523550085708924337}
   rect:
     serializedVersion: 2
-    x: 305
-    y: -30
+    x: 201
+    y: -134
     width: 200
     height: 50
   normalStyle:
@@ -2251,8 +2250,8 @@ MonoBehaviour:
   - {fileID: 2974173745212827257}
   rect:
     serializedVersion: 2
-    x: 308
-    y: 155
+    x: 204
+    y: 51
     width: 200
     height: 50
   normalStyle:
@@ -2416,8 +2415,8 @@ MonoBehaviour:
   - {fileID: -1966604287608054442}
   rect:
     serializedVersion: 2
-    x: 306
-    y: 274
+    x: 202
+    y: 170
     width: 200
     height: 50
   normalStyle:

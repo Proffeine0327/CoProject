@@ -8,12 +8,12 @@ public class AnnounceUI : MonoBehaviour
 {
     private static AnnounceUI instance;
 
-    public static void DisplayUI(string title, string explain, float fadeIn, float wait, float fadeOut)
+    public static void DisplayUI(string title, string explain, float fadeIn, float fadeOut)
     {
         instance.title.text = title;
         instance.explain.text = explain;
 
-        instance.StartCoroutine(instance.Animation(fadeIn, wait, fadeOut));
+        instance.StartCoroutine(instance.Animation(fadeIn, fadeOut));
     }
 
     [SerializeField] private TextMeshProUGUI title;
@@ -32,7 +32,7 @@ public class AnnounceUI : MonoBehaviour
         explain.gameObject.SetActive(false);
     }
 
-    private IEnumerator Animation(float _in, float wait, float _out)
+    private IEnumerator Animation(float _in, float _out)
     {
         bg.gameObject.SetActive(true);
         title.gameObject.SetActive(true);
@@ -46,7 +46,7 @@ public class AnnounceUI : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(wait);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
 
         for (float t = _out; t > 0; t -= Time.deltaTime)
         {

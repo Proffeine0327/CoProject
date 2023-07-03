@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private Situation test;
-    [SerializeField] private UnityEvent ev;
+    [SerializeField] private Object sprite;
 
     private Rigidbody2D rb;
 

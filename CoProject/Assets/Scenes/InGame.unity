@@ -2395,21 +2395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   test: {fileID: 11400000, guid: e18cc722294517a43960ec33225b01d6, type: 2}
-  ev:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1276906090}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_isStatic
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
+  sprite: {fileID: 21300000, guid: d6c24cabfbce431448296ce82b120c54, type: 3}
 --- !u!50 &1276906094
 Rigidbody2D:
   serializedVersion: 4
