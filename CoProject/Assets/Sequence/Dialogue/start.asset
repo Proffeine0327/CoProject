@@ -109,13 +109,14 @@ MonoBehaviour:
   isPlayTimeline: 1
   betweenTime: {x: 0, y: 4}
   wrapMode: 0
+  methods: []
   passTime: 4
   nexts:
   - {fileID: -7584799702853405884}
   rect:
     serializedVersion: 2
-    x: 210
-    y: 16
+    x: 307
+    y: 31
     width: 200
     height: 50
   normalStyle:
@@ -310,6 +311,185 @@ MonoBehaviour:
   modification_key: []
   modification_type: 
   modification_value: 
+--- !u!114 &-4743143597270556607
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd8afba1c05c0b4dbabf615d2f144d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narrator: "\uD50C\uB808\uC774\uC5B4"
+  text: "\uBCF5\uC0AC\uAE30\uB294 \uB098\uAC00\uB294 \uAE38\uBAA9\uCABD\uC5D0 \uD558\uB098
+    \uC788\uC5C8\uC744\uD150\uB370..."
+  type: 1
+  sprite: {fileID: 0}
+  isPlayTimeline: 0
+  betweenTime: {x: 0, y: 0}
+  wrapMode: 0
+  methods:
+  - classType: AnnounceUI
+    methodName: DisplayUI
+    openParameter: 1
+    parameters:
+    - parameterValue: "\uB9B4\uC874\uC0AC"
+      parameterType: System.String
+    - parameterValue: "\uB9B4\uD30C\uB294 \uC2E0 \uADF8 \uC790\uCCB4\uB2E4"
+      parameterType: System.String
+    - parameterValue: 2
+      parameterType: System.Single
+    - parameterValue: 3
+      parameterType: System.Single
+    - parameterValue: 3
+      parameterType: System.Single
+  passTime: 0
+  nexts: []
+  rect:
+    serializedVersion: 2
+    x: 513
+    y: 274
+    width: 200
+    height: 50
+  normalStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: -8879322592709600312, guid: 0000000000000000d000000000000000, type: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 12
+      m_Right: 12
+      m_Top: 12
+      m_Bottom: 12
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 1
+    m_Alignment: 4
+    m_WordWrap: 1
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  selectedStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 771625508111389177, guid: 0000000000000000d000000000000000, type: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_ScaledBackgrounds: []
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 12
+      m_Right: 12
+      m_Top: 12
+      m_Bottom: 12
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 1
+    m_Alignment: 4
+    m_WordWrap: 1
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  isSelected: 1
+  target: {fileID: 11400000}
 --- !u!114 &-3885765518062020489
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -362,13 +542,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 1
   nexts:
   - {fileID: -8293486299764182018}
   rect:
     serializedVersion: 2
-    x: 210
-    y: 377
+    x: 307
+    y: 393
     width: 200
     height: 50
   normalStyle:
@@ -527,13 +708,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: 562058863028170800}
   rect:
     serializedVersion: 2
-    x: 209
-    y: 199
+    x: 306
+    y: 214
     width: 200
     height: 50
   normalStyle:
@@ -731,13 +913,14 @@ MonoBehaviour:
   isPlayTimeline: 1
   betweenTime: {x: 8.5, y: 10}
   wrapMode: 2
+  methods: []
   passTime: 2.5
   nexts:
   - {fileID: -1135857425736549407}
   rect:
     serializedVersion: 2
-    x: 208
-    y: 433
+    x: 305
+    y: 449
     width: 200
     height: 50
   normalStyle:
@@ -896,13 +1079,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -5456749795339915548}
   rect:
     serializedVersion: 2
-    x: 419
-    y: 377
+    x: 514
+    y: 389
     width: 200
     height: 50
   normalStyle:
@@ -1097,13 +1281,14 @@ MonoBehaviour:
   isPlayTimeline: 1
   betweenTime: {x: 4, y: 8}
   wrapMode: 1
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -5717482986233709935}
   rect:
     serializedVersion: 2
-    x: 210
-    y: 78
+    x: 306
+    y: 90
     width: 200
     height: 50
   normalStyle:
@@ -1281,13 +1466,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -2634496887123933589}
   rect:
     serializedVersion: 2
-    x: 417
-    y: 431
+    x: 514
+    y: 447
     width: 200
     height: 50
   normalStyle:
@@ -1426,6 +1612,22 @@ MonoBehaviour:
     m_StretchHeight: 0
   isSelected: 0
   target: {fileID: 11400000}
+--- !u!114 &-246680975867197966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7657d281e8186da42bf7f413fa149fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 11400000}
+  begin: {fileID: -3656397764811197}
+  end: {fileID: 75632516398468787}
+  isSelected: 0
 --- !u!114 &-3656397764811197
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1445,12 +1647,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
-  nexts: []
+  nexts:
+  - {fileID: 75632516398468787}
   rect:
     serializedVersion: 2
-    x: 421
-    y: 315
+    x: 513
+    y: 336
     width: 200
     height: 50
   normalStyle:
@@ -1603,7 +1807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playable: {fileID: 11400000, guid: 96ce12feccf386d4ab7f9a17575dd072, type: 2}
   variableTable: {fileID: 11400000, guid: c7a2aa9737dc1f241a6ca3b72fb808c9, type: 2}
-  currentSentence: {fileID: -3656397764811197}
+  currentSentence: {fileID: -6749562186541157915}
   sentences:
   - {fileID: 1918685214915394262}
   - {fileID: -6749562186541157915}
@@ -1617,6 +1821,7 @@ MonoBehaviour:
   - {fileID: -269927563810744287}
   - {fileID: -1596199190047606928}
   - {fileID: -3656397764811197}
+  - {fileID: -4743143597270556607}
   connections:
   - {fileID: -6995076596323272305}
   - {fileID: -3885765518062020489}
@@ -1629,6 +1834,27 @@ MonoBehaviour:
   - {fileID: 9018924329834220302}
   - {fileID: 7060836338476990673}
   - {fileID: 5861335698646507661}
+  - {fileID: -246680975867197966}
+--- !u!114 &75632516398468787
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127ccb4eadab8de499439e87557b9341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  criteria_key: []
+  criteria_type: 
+  criteria_value: 
+  next: {fileID: -4743143597270556607}
+  modification_key: []
+  modification_type: 
+  modification_value: 
 --- !u!114 &562058863028170800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1668,13 +1894,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: 2356339189672376013}
   rect:
     serializedVersion: 2
-    x: 208
-    y: 317
+    x: 305
+    y: 333
     width: 200
     height: 50
   normalStyle:
@@ -1832,13 +2059,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -523550085708924337}
   rect:
     serializedVersion: 2
-    x: 209
-    y: -46
+    x: 305
+    y: -30
     width: 200
     height: 50
   normalStyle:
@@ -2017,13 +2245,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: 2974173745212827257}
   rect:
     serializedVersion: 2
-    x: 211
-    y: 139
+    x: 308
+    y: 155
     width: 200
     height: 50
   normalStyle:
@@ -2181,13 +2410,14 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -1966604287608054442}
   rect:
     serializedVersion: 2
-    x: 208
-    y: 258
+    x: 306
+    y: 274
     width: 200
     height: 50
   normalStyle:

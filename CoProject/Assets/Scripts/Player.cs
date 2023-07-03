@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Dialogue;
 
 public class Player : MonoBehaviour
 {
-    public static Player instance { get; private set; }
+    private static Player instance;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private Situation test;
+    [SerializeField] private UnityEvent ev;
 
     private Rigidbody2D rb;
 

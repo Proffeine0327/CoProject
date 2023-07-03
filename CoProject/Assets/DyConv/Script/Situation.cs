@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -98,6 +100,105 @@ namespace Dialogue
         }
 
 #if UNITY_EDITOR
+        [UnityEditor.Callbacks.DidReloadScripts]
+        public static void AfterAssemblyCompile()
+        {
+            var situations = GetAllInstances<Situation>();
+
+            foreach (var situation in situations)
+            {
+                foreach (var sentence in situation.sentences)
+                    foreach (var m in sentence.Methods)
+                    {
+                        Type type = null;
+                        foreach (var t in TypeCache.GetTypesDerivedFrom<Component>())
+                        {
+                            if (t.Name == m.classType)
+                            {
+                                type = t;
+                                continue;
+                            }
+                        }
+
+                        if (type == null)
+                        {
+                            m.classType = "";
+                            m.methodName = "";
+
+                            continue;
+                        }
+
+                        var method = type.GetMethod(m.methodName);
+
+                        if (method == null)
+                        {
+                            m.classType = "";
+                            m.methodName = "";
+                            m.parameters.Clear();
+
+                            continue;
+                        }
+
+                        var pars = method.GetParameters();
+
+                        while (m.parameters.Count != pars.Length)
+                        {
+                            if (m.parameters.Count < pars.Length)
+                            {
+                                m.parameters.Add(new ParamInfo());
+                                m.parameters[m.parameters.Count - 1].parameterValue = "";
+                            }
+                            else
+                                m.parameters.RemoveAt(m.parameters.Count - 1);
+                        }
+
+                        for (int i = 0; i < pars.Length; i++)
+                        {
+                            var parameterValue = m.parameters[i];
+                            if (pars[i].ParameterType == typeof(int))
+                            {
+                                if (!int.TryParse(parameterValue.parameterValue, out var result))
+                                    parameterValue.parameterValue = "0";
+                            }
+
+                            if (pars[i].ParameterType == typeof(float))
+                            {
+                                if (!float.TryParse(parameterValue.parameterValue, out var result))
+                                    parameterValue.parameterValue = "0";
+                            }
+                        }
+
+                        for (int i = 0; i < pars.Length; i++)
+                        {
+                            var parameterType = m.parameters[i];
+                            if (pars[i].ParameterType == typeof(int))
+                                parameterType.parameterType = typeof(int).ToString();
+
+                            if (pars[i].ParameterType == typeof(float))
+                                parameterType.parameterType = typeof(float).ToString();
+
+                            if (pars[i].ParameterType == typeof(string))
+                                parameterType.parameterType = typeof(string).ToString();
+                        }
+                    }
+                EditorUtility.SetDirty(situation);
+                AssetDatabase.SaveAssetIfDirty(situation);
+            }
+        }
+
+        public static T[] GetAllInstances<T>() where T : ScriptableObject
+        {
+            string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name); //FindAssets uses tags check documentation for more info
+            T[] a = new T[guids.Length];
+            for (int i = 0; i < guids.Length; i++) //probably could get optimized
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                a[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+            }
+
+            return a;
+        }
+
         public List<Connection> connections = new List<Connection>();
 
         private void OnEnable()

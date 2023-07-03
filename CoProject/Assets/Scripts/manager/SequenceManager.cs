@@ -51,6 +51,17 @@ public class SequenceManager : MonoBehaviour
         while (true)
         {
             speaker.text = current.currentSentence.Narrator;
+
+            if(current.currentSentence.Sprite != null)
+            {
+                image.sprite = current.currentSentence.Sprite;
+                image.color = Color.white;
+            }
+            else
+            {
+                image.color = new Color(1,1,1,0);
+            }
+            
             if (current.currentSentence.Type == SentenceType.normal)
             {
                 for (int i = 0; i < current.currentSentence.Text.Length; i++)
@@ -73,6 +84,8 @@ public class SequenceManager : MonoBehaviour
 
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
             }
+            foreach(var method in current.currentSentence.Methods)
+                method.Invoke();
 
             if (current.canContinue)
             {

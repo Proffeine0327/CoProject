@@ -1,7 +1,9 @@
 using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
 
@@ -22,6 +24,7 @@ namespace Dialogue
         [SerializeField] private bool isPlayTimeline;
         [SerializeField] private Vector2 betweenTime;
         [SerializeField] private DirectorWrapMode wrapMode;
+        [SerializeField] private List<SerializableStaticMethod> methods = new List<SerializableStaticMethod>();
         [SerializeField] private float passTime;
 
         public string Narrator => narrator;
@@ -31,6 +34,7 @@ namespace Dialogue
         public bool IsPlayTimeline => isPlayTimeline;
         public Vector2 BetweenTime => betweenTime;
         public DirectorWrapMode WrapMode => wrapMode;
+        public List<SerializableStaticMethod> Methods => methods;
         public float PassTime => passTime;
 
         [SerializeField] private List<NextSentenceInfo> nexts = new List<NextSentenceInfo>();

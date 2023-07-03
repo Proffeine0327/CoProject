@@ -59,6 +59,7 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts: []
   rect:
@@ -222,6 +223,7 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: 1089989885092220196}
@@ -386,6 +388,7 @@ MonoBehaviour:
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
+  methods: []
   passTime: 0
   nexts:
   - {fileID: -8842517097629222052}
@@ -626,6 +629,7 @@ MonoBehaviour:
   isPlayTimeline: 1
   betweenTime: {x: 0, y: 4}
   wrapMode: 0
+  methods: []
   passTime: 4
   nexts:
   - {fileID: -8039023283345038654}

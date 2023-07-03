@@ -43,10 +43,14 @@ public class SentenceEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isPlayTimeline"));
         if(serializedObject.FindProperty("isPlayTimeline").boolValue)
         {
+            EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("betweenTime"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("wrapMode"));
+            EditorGUILayout.EndVertical();
         }
+        EditorGUILayout.Space(10);
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("methods"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("passTime"));
 
         serializedObject.ApplyModifiedProperties();
