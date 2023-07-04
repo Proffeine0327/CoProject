@@ -62,8 +62,8 @@ MonoBehaviour:
   - {fileID: -6946312588871118327}
   rect:
     serializedVersion: 2
-    x: 308
-    y: 152
+    x: 270
+    y: 189
     width: 200
     height: 50
   normalStyle:
@@ -200,7 +200,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  isSelected: 1
+  isSelected: 0
   target: {fileID: 11400000}
 --- !u!114 &-6288445736978980028
 MonoBehaviour:
@@ -226,8 +226,8 @@ MonoBehaviour:
   nexts: []
   rect:
     serializedVersion: 2
-    x: 557
-    y: 149
+    x: 519
+    y: 186
     width: 200
     height: 50
   normalStyle:
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playable: {fileID: 0}
   variableTable: {fileID: 11400000, guid: c7a2aa9737dc1f241a6ca3b72fb808c9, type: 2}
-  currentSentence: {fileID: 7866651300328438090}
+  currentSentence: {fileID: -6288445736978980028}
   sentences:
   - {fileID: 7643333060890238642}
   - {fileID: 7866651300328438090}
@@ -490,8 +490,8 @@ MonoBehaviour:
   - {fileID: 834616388033055932}
   rect:
     serializedVersion: 2
-    x: 442
-    y: 87
+    x: 404
+    y: 124
     width: 200
     height: 50
   normalStyle:
@@ -654,8 +654,8 @@ MonoBehaviour:
   nexts: []
   rect:
     serializedVersion: 2
-    x: 268
-    y: 210
+    x: 230
+    y: 247
     width: 200
     height: 50
   normalStyle:

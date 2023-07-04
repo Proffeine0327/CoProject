@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keys:
   - IsCopyedData
-  - ToGoExaggeration
+  - ToGoManager
   values: 0000000000000000

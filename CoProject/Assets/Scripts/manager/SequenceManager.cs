@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +12,7 @@ public class SequenceManager : MonoBehaviour
     private static SequenceManager instance;
 
     public static bool isPlayingSequence => instance.current != null;
+    public static bool isPlayingTimeline => isPlayingSequence && instance.current.playable != null;
     public static void StartSequence(Situation situation)
     {
         situation.StartDialogue();

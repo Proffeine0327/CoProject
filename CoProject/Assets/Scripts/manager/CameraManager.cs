@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate() 
     {
-        if(SequenceManager.isPlayingSequence) return;
+        if(SequenceManager.isPlayingTimeline) return;
         // var height = cam.orthographicSize;
         // var width = height * Screen.width / Screen.height;
 
