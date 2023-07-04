@@ -37,7 +37,10 @@ public class Player : MonoBehaviour
         var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
 
-        if(SequenceManager.isPlayingSequence)
+        if(
+            SequenceManager.isPlayingSequence ||
+            AnnounceUI.isShowingAnnounce
+        )
         {
             h = 0;
             v = 0;

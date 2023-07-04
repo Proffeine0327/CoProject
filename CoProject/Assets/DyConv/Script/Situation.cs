@@ -146,7 +146,7 @@ namespace Dialogue
                             if (m.parameters.Count < pars.Length)
                             {
                                 m.parameters.Add(new ParamInfo());
-                                m.parameters[m.parameters.Count - 1].parameterValue = "";
+                                m.parameters[m.parameters.Count - 1].Reset();
                             }
                             else
                                 m.parameters.RemoveAt(m.parameters.Count - 1);
@@ -154,31 +154,27 @@ namespace Dialogue
 
                         for (int i = 0; i < pars.Length; i++)
                         {
-                            var parameterValue = m.parameters[i];
-                            if (pars[i].ParameterType == typeof(int))
-                            {
-                                if (!int.TryParse(parameterValue.parameterValue, out var result))
-                                    parameterValue.parameterValue = "0";
-                            }
-
-                            if (pars[i].ParameterType == typeof(float))
-                            {
-                                if (!float.TryParse(parameterValue.parameterValue, out var result))
-                                    parameterValue.parameterValue = "0";
-                            }
-                        }
-
-                        for (int i = 0; i < pars.Length; i++)
-                        {
                             var parameterType = m.parameters[i];
+
                             if (pars[i].ParameterType == typeof(int))
-                                parameterType.parameterType = typeof(int).ToString();
+                                parameterType.paramType = ParamType.Int;
 
                             if (pars[i].ParameterType == typeof(float))
-                                parameterType.parameterType = typeof(float).ToString();
+                                parameterType.paramType = ParamType.Float;
 
                             if (pars[i].ParameterType == typeof(string))
-                                parameterType.parameterType = typeof(string).ToString();
+                                parameterType.paramType = ParamType.String;
+
+                            for (var current = pars[i].ParameterType; current != null; current = current.BaseType)
+                            {
+                                if (current == typeof(UnityEngine.Object))
+                                {
+                                    Debug.Log(parameterType.objectType = pars[i].ParameterType.ToString());
+                                    parameterType.objectType = pars[i].ParameterType.ToString();
+                                    parameterType.paramType = ParamType.Object;
+                                    break;
+                                }
+                            }
                         }
                     }
                 EditorUtility.SetDirty(situation);

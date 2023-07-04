@@ -53,7 +53,8 @@ public class SerializableStaticMethodPropertyDrawer : PropertyDrawer
                         (
                             par.ParameterType != typeof(int) &&
                             par.ParameterType != typeof(float) &&
-                            par.ParameterType != typeof(string)
+                            par.ParameterType != typeof(string) &&
+                            !IsUnityObject(par.ParameterType)
                         )
                             continueMethod = true;
                     }
@@ -90,35 +91,71 @@ public class SerializableStaticMethodPropertyDrawer : PropertyDrawer
             {
                 position.y += EditorGUIUtility.singleLineHeight;
                 var pars = parameters.GetArrayElementAtIndex(i);
-                var value = pars.FindPropertyRelative("parameterValue");
-                if (pars.FindPropertyRelative("parameterType").stringValue == typeof(int).ToString())
+                if (pars.FindPropertyRelative("paramType").enumValueFlag == (int)ParamType.Int)
                 {
                     EditorGUI.LabelField(new Rect(position.x + 20, position.y, 100, EditorGUIUtility.singleLineHeight), "Int: ");
-                    value.stringValue =
-                        EditorGUI.IntField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), int.Parse(value.stringValue)).ToString();
+                    pars.FindPropertyRelative("intValue").intValue =
+                        EditorGUI.IntField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), pars.FindPropertyRelative("intValue").intValue);
                 }
 
-                if (pars.FindPropertyRelative("parameterType").stringValue == typeof(float).ToString())
+                if (pars.FindPropertyRelative("paramType").enumValueFlag == (int)ParamType.Float)
                 {
                     EditorGUI.LabelField(new Rect(position.x + 20, position.y, 100, EditorGUIUtility.singleLineHeight), "Float: ");
-                    value.stringValue =
-                        EditorGUI.FloatField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), float.Parse(value.stringValue)).ToString();
+                    pars.FindPropertyRelative("floatValue").floatValue =
+                        EditorGUI.FloatField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), pars.FindPropertyRelative("floatValue").floatValue);
                 }
 
-                if (pars.FindPropertyRelative("parameterType").stringValue == typeof(string).ToString())
+                if (pars.FindPropertyRelative("paramType").enumValueFlag == (int)ParamType.String)
                 {
                     EditorGUI.LabelField(new Rect(position.x + 20, position.y, 100, EditorGUIUtility.singleLineHeight), "String: ");
-                    value.stringValue =
-                        EditorGUI.TextField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), value.stringValue);
+                    pars.FindPropertyRelative("stringValue").stringValue =
+                        EditorGUI.TextField(new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight), pars.FindPropertyRelative("stringValue").stringValue);
+                }
+
+                if (pars.FindPropertyRelative("paramType").enumValueFlag == (int)ParamType.Object)
+                {
+                    var labelDisplay = pars.FindPropertyRelative("objectType").stringValue.Split('.');
+                    
+                    EditorGUI.LabelField(new Rect(position.x + 20, position.y, 100, EditorGUIUtility.singleLineHeight), $"{labelDisplay[labelDisplay.Length - 1]}: ");
+                    pars.FindPropertyRelative("objectReferenceValue").objectReferenceValue =
+                        EditorGUI.ObjectField(
+                            new Rect(position.x + 120, position.y, position.width - 120, EditorGUIUtility.singleLineHeight),
+                            pars.FindPropertyRelative("objectReferenceValue").objectReferenceValue,
+                            FindType(pars.FindPropertyRelative("objectType").stringValue),
+                            false
+                            );
                 }
             }
         }
         property.serializedObject.ApplyModifiedProperties();
     }
 
+    private bool IsUnityObject(Type par)
+    {
+        for (var current = par; current != null; current = current.BaseType)
+            if (current == typeof(UnityEngine.Object)) return true;
+        return false;
+    }
+
+    private Type FindType(string typeName)
+    {
+        var assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
+        foreach (var assembly in assemblies)
+        {
+            var a = Assembly.Load(assembly);
+            if (a != null)
+            {
+                var type = a.GetType(typeName);
+                if (type != null)
+                    return type;
+            }
+        }
+        return null;
+    }
+
     private void ApplyChange(SerializedProperty parameterProperty, Type type = null, string methodName = null)
     {
-        if(type == null)
+        if (type == null)
         {
             parameterProperty.arraySize = 0;
             return;
@@ -130,25 +167,32 @@ public class SerializableStaticMethodPropertyDrawer : PropertyDrawer
 
         for (int i = 0; i < pars.Length; i++)
         {
-            var parameterValue = parameterProperty.GetArrayElementAtIndex(i).FindPropertyRelative("parameterValue");
-            var parameterType = parameterProperty.GetArrayElementAtIndex(i).FindPropertyRelative("parameterType");
+            var parameterValue = parameterProperty.GetArrayElementAtIndex(i);
+            var paramType = parameterProperty.GetArrayElementAtIndex(i).FindPropertyRelative("paramType");
+
+            if (IsUnityObject(pars[i].ParameterType))
+            {
+                paramType.enumValueFlag = (int)ParamType.Object;
+                parameterValue.FindPropertyRelative("objectType").stringValue = pars[i].ParameterType.ToString();
+                parameterValue.FindPropertyRelative("objectReferenceValue").objectReferenceValue = null;
+            }
 
             if (pars[i].ParameterType == typeof(int))
             {
-                parameterType.stringValue = typeof(int).ToString();
-                parameterValue.stringValue = "0";
+                paramType.enumValueFlag = (int)ParamType.Int;
+                parameterValue.FindPropertyRelative("intValue").intValue = 0;
             }
 
             if (pars[i].ParameterType == typeof(float))
             {
-                parameterType.stringValue = typeof(float).ToString();
-                parameterValue.stringValue = "0";
+                paramType.enumValueFlag = (int)ParamType.Float;
+                parameterValue.FindPropertyRelative("floatValue").floatValue = 0;
             }
 
             if (pars[i].ParameterType == typeof(string))
             {
-                parameterType.stringValue = typeof(string).ToString();
-                parameterValue.stringValue = "";
+                paramType.enumValueFlag = (int)ParamType.String;
+                parameterValue.FindPropertyRelative("stringValue").stringValue = "";
             }
         }
     }

@@ -29,8 +29,21 @@ namespace Dialogue
             var p = new object[parameters.Count];
             for (int i = 0; i < methodp.Length; i++)
             {
-                p[i] = Convert.ChangeType(parameters[i].parameterValue, methodp[i].ParameterType);
-
+                switch (parameters[i].paramType)
+                {
+                    case ParamType.Int:
+                        p[i] = Convert.ChangeType(parameters[i].intValue, methodp[i].ParameterType);
+                        break;
+                    case ParamType.Float:
+                        p[i] = Convert.ChangeType(parameters[i].floatValue, methodp[i].ParameterType);
+                        break;
+                    case ParamType.String:
+                        p[i] = Convert.ChangeType(parameters[i].stringValue, methodp[i].ParameterType);
+                        break;
+                    case ParamType.Object:
+                        p[i] = Convert.ChangeType(parameters[i].objectReferenceValue, methodp[i].ParameterType);
+                        break;
+                }
             }
 
             return info.Invoke(null, p);
@@ -48,11 +61,21 @@ namespace Dialogue
     [Serializable]
     public class ParamInfo
     {
-        public ParamType parmaType;
+        public ParamType paramType;
 
         public int intValue;
         public float floatValue;
         public string stringValue;
-        public UnityEngine.Object objectRefrenceValue;
+
+        public UnityEngine.Object objectReferenceValue;
+        public string objectType;
+
+        public void Reset()
+        {
+            intValue = 0;
+            floatValue = 0;
+            stringValue = "";
+            objectReferenceValue = null;
+        }
     }
 }
