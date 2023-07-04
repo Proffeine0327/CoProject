@@ -106,7 +106,8 @@ public class SequenceManager : MonoBehaviour
             }
             else break;
         }
-
+        
+        yield return null;
         EndSequence();
     }
 

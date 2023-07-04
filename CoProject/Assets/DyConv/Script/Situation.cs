@@ -32,10 +32,10 @@ namespace Dialogue
                 if (next.criteria_key.Count == 0) return true;
 
                 for (int i = 0; i < next.criteria_key.Count; i++)
-                    if (VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i])) return true;
+                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i])) return false;
             }
 
-            return false;
+            return true;
         }
 
         public List<Sentence> GetNexts(bool ignoreCriteria)
@@ -87,15 +87,12 @@ namespace Dialogue
                 }
 
                 for (int i = 0; i < next.criteria_key.Count; i++)
-                {
-                    if (VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i]))
-                    {
-                        currentSentence = next.next;
-                        for (int k = 0; k < next.modification_key.Count; k++)
-                            VariableManager.ModifyVariable(next.modification_key[i], next.modification_type[k], next.modification_value[k]);
-                        return;
-                    }
-                }
+                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i])) return;
+                    
+                currentSentence = next.next;
+                for (int k = 0; k < next.modification_key.Count; k++)
+                    VariableManager.ModifyVariable(next.modification_key[k], next.modification_type[k], next.modification_value[k]);
+                return;
             }
         }
 
@@ -169,8 +166,6 @@ namespace Dialogue
                             {
                                 if (current == typeof(UnityEngine.Object))
                                 {
-                                    Debug.Log(parameterType.objectType = pars[i].ParameterType.ToString());
-                                    parameterType.objectType = pars[i].ParameterType.ToString();
                                     parameterType.paramType = ParamType.Object;
                                     break;
                                 }

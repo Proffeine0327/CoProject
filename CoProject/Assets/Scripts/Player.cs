@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
 {
     private static Player instance;
 
+    [Header("Move")]
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Situation test;
-    [SerializeField] private Object sprite;
+    [SerializeField] private float runSpeedRatio;
+    [Header("Interact")]
+    [SerializeField] private float interactRange;
+    [SerializeField] private LayerMask interactLayer;
 
     private Rigidbody2D rb;
 
@@ -24,12 +27,7 @@ public class Player : MonoBehaviour
     private void Update() 
     {
         Move();
-
-        if(!SequenceManager.isPlayingSequence)
-        {
-            if(Input.GetKeyDown(KeyCode.C))
-                SequenceManager.StartSequence(test);
-        }
+        Interact();
     }
 
     private void Move()
@@ -47,5 +45,33 @@ public class Player : MonoBehaviour
         }
 
         rb.velocity = new Vector2(h, v).normalized * moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? 1.5f : 1f);
+    }
+
+    private void Interact()
+    {
+        InteractUI.DisplayUI(false, Vector2.zero, "");
+        
+        if(
+            SequenceManager.isPlayingSequence ||
+            AnnounceUI.isShowingAnnounce
+        ) return;
+
+        var hits = Physics2D.OverlapCircleAll(transform.position, interactRange, interactLayer);
+
+        foreach(var hit in hits)
+        {
+            if(hit.TryGetComponent<IInteractable>(out var comp))
+            {
+                comp.DisplayUI();
+                if(Input.GetKeyDown(KeyCode.Z)) comp.Interact();
+                break;
+            }
+        }
+    }
+    
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, interactRange);    
     }
 }
