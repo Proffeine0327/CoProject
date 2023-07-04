@@ -31,11 +31,19 @@ namespace Dialogue
             {
                 if (next.criteria_key.Count == 0) return true;
 
+                var c = false;
                 for (int i = 0; i < next.criteria_key.Count; i++)
-                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i])) return false;
+                {
+                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i]))
+                    {
+                        c = true;
+                        break;
+                    }
+                }
+                if(c) continue;
+                return true;
             }
-
-            return true;
+            return false;
         }
 
         public List<Sentence> GetNexts(bool ignoreCriteria)
@@ -86,9 +94,17 @@ namespace Dialogue
                     return;
                 }
 
+                var c = false;
                 for (int i = 0; i < next.criteria_key.Count; i++)
-                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i])) return;
-                    
+                {
+                    if (!VariableManager.CheckCriteria(next.criteria_key[i], next.criteria_type[i], next.criteria_value[i]))
+                    {
+                        c = true;
+                        break;
+                    }
+                }
+                if(c) continue;
+
                 currentSentence = next.next;
                 for (int k = 0; k < next.modification_key.Count; k++)
                     VariableManager.ModifyVariable(next.modification_key[k], next.modification_type[k], next.modification_value[k]);

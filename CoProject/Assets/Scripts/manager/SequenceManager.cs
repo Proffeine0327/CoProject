@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,6 @@ public class SequenceManager : MonoBehaviour
     {
         situation.StartDialogue();
         instance.current = situation;
-        instance.bg.SetActive(true);
         instance.pd.playableAsset = situation.playable;
 
         instance.StartCoroutine(instance.ContinueSequence());
@@ -50,20 +50,20 @@ public class SequenceManager : MonoBehaviour
     {
         while (true)
         {
-            speaker.text = current.currentSentence.Narrator;
-
-            if(current.currentSentence.Sprite != null)
-            {
-                image.sprite = current.currentSentence.Sprite;
-                image.color = Color.white;
-            }
-            else
-            {
-                image.color = new Color(1,1,1,0);
-            }
-            
             if (current.currentSentence.Type == SentenceType.normal)
             {
+                speaker.text = current.currentSentence.Narrator;
+
+                if(current.currentSentence.Sprite != null)
+                {
+                    image.sprite = current.currentSentence.Sprite;
+                    image.color = Color.white;
+                }
+                else
+                {
+                    image.color = new Color(1,1,1,0);
+                }
+                
                 for (int i = 0; i < current.currentSentence.Text.Length; i++)
                 {
                     text.text = current.currentSentence.Text.Substring(0, i);
@@ -84,18 +84,19 @@ public class SequenceManager : MonoBehaviour
 
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z));
             }
+
+            if (current.currentSentence.PassTime > 0)
+            {
+                bg.SetActive(false);
+                yield return new WaitForSeconds(current.currentSentence.PassTime);
+                bg.SetActive(true);
+            }
             foreach(var method in current.currentSentence.Methods)
                 method.Invoke();
 
             if (current.canContinue)
             {
-                if (current.currentSentence.PassTime > 0)
-                {
-                    bg.SetActive(false);
-                    yield return new WaitForSeconds(current.currentSentence.PassTime);
-                    bg.SetActive(true);
-                }
-
+                instance.bg.SetActive(true);
                 current.Continue();
 
                 if (current.currentSentence.IsPlayTimeline)

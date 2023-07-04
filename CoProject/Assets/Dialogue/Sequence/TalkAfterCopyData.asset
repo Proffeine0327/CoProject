@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrator: "\uC815 \uC0AC\uC6D0"
-  text: "\uBCF5\uC0AC\uD574\uC11C \uAC00\uC838\uC640\uC8FC\uC138\uC694."
+  text: "\uBCF5\uC0AC\uAE30\uB294 \uB098\uAC00\uB294 \uC785\uAD6C\uCABD\uC5D0 \uC788\uC744\uAC70\uC5D0\uC694."
   type: 1
   sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   isPlayTimeline: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   target: {fileID: 11400000}
   begin: {fileID: -48706786192040447}
   end: {fileID: 1312101309811934862}
-  isSelected: 1
+  isSelected: 0
 --- !u!114 &-4098083497209720580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -775,7 +775,7 @@ MonoBehaviour:
   target: {fileID: 11400000}
   begin: {fileID: -48706786192040447}
   end: {fileID: 2715286154583362530}
-  isSelected: 0
+  isSelected: 1
 --- !u!114 &1312101309811934862
 MonoBehaviour:
   m_ObjectHideFlags: 1
