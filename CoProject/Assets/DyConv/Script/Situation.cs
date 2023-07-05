@@ -19,7 +19,7 @@ namespace Dialogue
         public Sentence currentSentence;
         public List<Sentence> sentences = new List<Sentence>();
 
-        public void StartDialogue()
+        public void Initialize()
         {
             currentSentence = sentences[0];
         }

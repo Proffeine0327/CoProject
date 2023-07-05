@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,12 +57,14 @@ public class Player : MonoBehaviour
             AnnounceUI.isShowingAnnounce
         ) return;
 
-        var hits = Physics2D.OverlapCircleAll(transform.position, interactRange, interactLayer);
+        var hits = Physics2D.OverlapCircleAll(transform.position, interactRange, interactLayer).OrderBy(h => Vector2.Distance(transform.position, h.transform.position));
 
         foreach(var hit in hits)
         {
-            if(hit.TryGetComponent<IInteractable>(out var comp))
+            if(hit.TryGetComponent<Interactable>(out var comp))
             {
+                if(!comp.canTalk) continue;
+
                 comp.DisplayUI();
                 if(Input.GetKeyDown(KeyCode.Z)) comp.Interact();
                 break;

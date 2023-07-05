@@ -19,10 +19,12 @@ public class AnnounceUI : MonoBehaviour
 
     public static bool isShowingAnnounce => instance._isShowingAnnounce;
 
+    [Header("Setting")]
     [SerializeField] private Image bg;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI explain;
     [SerializeField] private Image img;
+    [Header("Display")]
 
     private float startbgalpha;
     private bool _isShowingAnnounce;

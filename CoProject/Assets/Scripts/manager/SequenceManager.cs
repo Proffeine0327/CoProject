@@ -15,7 +15,7 @@ public class SequenceManager : MonoBehaviour
     public static bool isPlayingTimeline => isPlayingSequence && instance.current.playable != null;
     public static void StartSequence(Situation situation)
     {
-        situation.StartDialogue();
+        situation.Initialize();
         instance.current = situation;
         instance.pd.playableAsset = situation.playable;
 
@@ -114,6 +114,7 @@ public class SequenceManager : MonoBehaviour
 
     public void EndSequence()
     {
+        current.Initialize();
         current = null;
         pd.Pause();
         bg.SetActive(false);
