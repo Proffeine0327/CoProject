@@ -5,8 +5,17 @@ using UnityEngine.Playables;
 
 public class Light2DControlAsset : PlayableAsset
 {
+    public Color color = Color.white;
+    public float intensity = 1f;
+
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
-        throw new System.NotImplementedException();
+        var playable = ScriptPlayable<Light2DControlBehaviour>.Create(graph);
+        var behaviour = playable.GetBehaviour();
+
+        behaviour.color = color;
+        behaviour.intensity = intensity;
+        
+        return playable;
     }
 }

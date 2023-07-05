@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using UnityEngine.Rendering.Universal;
 
-public class Light2DControlTrack : TrackAsset
-{
-    public override Playable CreateTrackMixer(PlayableGraph graph, GameObject go, int inputCount)
-    {
-        return base.CreateTrackMixer(graph, go, inputCount);
-    }
-}
+[TrackClipType(typeof(Light2DControlAsset))]
+[TrackBindingType(typeof(Light2D))]
+public class Light2DControlTrack : TrackAsset { }
