@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float steminaSubtractAmount;
     [Header("Attack")]
     [SerializeField] private Weapon[] weaponSlots;
+    [SerializeField] private bool[] getWeapon;
     [Header("Interact")]
     [SerializeField] private float interactRange;
     [SerializeField] private LayerMask interactLayer;
@@ -27,10 +28,11 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerDirection playerDirection;
-    private int curWeaponIndex = 0;
+    private int curWeaponIndex = -1;
     private float curStemina;
-    private float playerRotation;
     private bool isRunning;
+
+    public void GetWeapon(int index) => getWeapon[index] = true;
 
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         curStemina = maxStemina;
+        getWeapon = new bool[weaponSlots.Length];
     }
 
     private void Update()
@@ -60,25 +63,32 @@ public class Player : MonoBehaviour
             h = 0;
             v = 0;
         }
-        
-        if(v == -1) playerDirection = PlayerDirection.down;
-        if(v == 1)  playerDirection = PlayerDirection.up;
-        if(h == -1) playerDirection = PlayerDirection.left;
-        if(h == 1)  playerDirection = PlayerDirection.right;
 
-        if(Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
-        if(Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
+        if (v == -1) playerDirection = PlayerDirection.down;
+        if (v == 1) playerDirection = PlayerDirection.up;
+        if (h == -1) playerDirection = PlayerDirection.left;
+        if (h == 1) playerDirection = PlayerDirection.right;
 
-        if(isRunning && rb.velocity.magnitude > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
+        if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
+
+        if (isRunning && rb.velocity.magnitude > 0)
         {
             curStemina -= steminaSubtractAmount * Time.deltaTime;
-            if(curStemina <= 0) isRunning = false;
+            if (curStemina <= 0) isRunning = false;
         }
         else curStemina += steminaAdditiveAmount * Time.deltaTime;
         curStemina = Mathf.Clamp(curStemina, 0, maxStemina);
 
         rb.velocity = new Vector2(h, v).normalized * moveSpeed * (isRunning ? runSpeedRatio : 1);
-        handLight.transform.rotation = Quaternion.Euler(0, 0, playerRotation);
+
+        switch(playerDirection)
+        {
+            case PlayerDirection.left:  handLight.transform.rotation = Quaternion.Euler(0, 0, 90); break;
+            case PlayerDirection.right: handLight.transform.rotation = Quaternion.Euler(0, 0, -90); break;
+            case PlayerDirection.up:    handLight.transform.rotation = Quaternion.Euler(0, 0, 0); break;
+            case PlayerDirection.down:  handLight.transform.rotation = Quaternion.Euler(0, 0, 180); break;
+        }
     }
 
     private void Interact()
@@ -107,10 +117,24 @@ public class Player : MonoBehaviour
 
     private void Weapon()
     {
-        for(int i = 0; i < weaponSlots.Length; i++)
+        for(int i = 0; i < weaponSlots.Length; i++) 
         {
-            weaponSlots[i].SetDirection(playerDirection);
+            if(!getWeapon[i]) continue;
+
+            if(Input.GetKeyDown((KeyCode)49 + i))
+                if(curWeaponIndex == i) curWeaponIndex = -1;
+                else curWeaponIndex = i;
         }
+
+        for (int i = 0; i < weaponSlots.Length; i++)
+        {
+            weaponSlots[i].gameObject.SetActive(i == curWeaponIndex);
+            if (i == curWeaponIndex) weaponSlots[i].SetDirection(playerDirection);
+        }
+
+        if(curWeaponIndex == -1) return;
+        if(Input.GetKey(KeyCode.A)) weaponSlots[curWeaponIndex].Attack();
+        if(Input.GetKeyDown(KeyCode.S)) weaponSlots[curWeaponIndex].Reload();
     }
 
     private void OnDrawGizmos()

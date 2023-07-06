@@ -16,4 +16,5 @@ MonoBehaviour:
   - IsCopyedData
   - ToGoManager
   - IsNight
-  values: 000000000000000000000000
+  - IsAlreadyGetGun
+  values: 00000000000000000000000000000000

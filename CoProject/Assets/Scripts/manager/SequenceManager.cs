@@ -43,7 +43,8 @@ public class SequenceManager : MonoBehaviour
 
         pd = GetComponent<PlayableDirector>();
 
-        StartSequence(situation);
+        if(situation != null)
+            StartSequence(situation);
     }
 
     public IEnumerator ContinueSequence()

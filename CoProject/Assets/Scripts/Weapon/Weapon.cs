@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour
     protected PlayerDirection direction;
 
     public abstract void Attack();
+    public abstract void Reload();
     public void SetDirection(PlayerDirection playerDirection) => direction = playerDirection;
 
     protected virtual void Update()

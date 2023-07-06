@@ -1633,7 +1633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playable: {fileID: 11400000, guid: 96ce12feccf386d4ab7f9a17575dd072, type: 2}
   variableTable: {fileID: 11400000, guid: c7a2aa9737dc1f241a6ca3b72fb808c9, type: 2}
-  currentSentence: {fileID: -269927563810744287}
+  currentSentence: {fileID: 1918685214915394262}
   sentences:
   - {fileID: 1918685214915394262}
   - {fileID: -6749562186541157915}
