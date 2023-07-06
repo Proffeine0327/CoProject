@@ -15,4 +15,5 @@ MonoBehaviour:
   keys:
   - IsCopyedData
   - ToGoManager
-  values: 0000000000000000
+  - IsNight
+  values: 000000000200000000000000

@@ -7,14 +7,14 @@ public class Npc : Interactable
 {
     public override void DisplayUI()
     {
-        if(situation != null && situation.canContinue)
+        if(situation != null && canTalk)
             base.DisplayUI();
     }
 
     public override void Interact()
     {
         Debug.Log(situation.currentSentence?.Type);
-        if(situation != null && situation.canContinue)
+        if(situation != null && canTalk)
             SequenceManager.StartSequence(situation);
     }
 }

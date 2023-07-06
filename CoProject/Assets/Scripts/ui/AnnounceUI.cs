@@ -70,8 +70,8 @@ public class AnnounceUI : MonoBehaviour
         var curIndex = 0;
         while (true)
         {
-            var curlayer = displayInfos[displayIndex].Layers[curIndex];
             curIndex = Mathf.Clamp(curIndex, 0, displayInfos[displayIndex].Layers.Count - 1);
+            var curlayer = displayInfos[displayIndex].Layers[curIndex];
 
             leftMark.gameObject.SetActive(true);
             rightMark.gameObject.SetActive(true);
@@ -81,7 +81,6 @@ public class AnnounceUI : MonoBehaviour
 
             title.text = curlayer.Title;
             explain.text = curlayer.Explain;
-
 
             if (Input.GetKeyDown(KeyCode.LeftArrow)) curIndex--;
             if (Input.GetKeyDown(KeyCode.RightArrow)) curIndex++;
