@@ -7,10 +7,10 @@ public class Bullet : MonoBehaviour
     private float speed;
     private Vector2 dir;
 
-    public void Init(float speed, float rotation)
+    public void Init(float speed, Vector2 direction)
     {
         this.speed = speed;
-        dir = new Vector2(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad)).normalized;
+        dir = direction;
     }
 
     private void Update()

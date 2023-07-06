@@ -16,6 +16,6 @@ public abstract class Weapon : MonoBehaviour
         h.localScale = new Vector3(direction is PlayerDirection.left ? -1 : 1, 1, 1);
 
         v.gameObject.SetActive(direction is PlayerDirection.up or PlayerDirection.down);
-        v.localScale = new Vector3(direction is PlayerDirection.down ? -1 : 1, 1, 1);
+        v.localScale = new Vector3(1, direction is PlayerDirection.down ? -1 : 1, 1);
     }
 }

@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float steminaSubtractAmount;
     [Header("Attack")]
     [SerializeField] private Weapon[] weaponSlots;
-    [SerializeField] private bool[] weaponActive;
     [Header("Interact")]
     [SerializeField] private float interactRange;
     [SerializeField] private LayerMask interactLayer;
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerDirection playerDirection;
-    private int curWeaponIndex;
+    private int curWeaponIndex = 0;
     private float curStemina;
     private float playerRotation;
     private bool isRunning;
@@ -45,6 +44,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Interact();
+        Weapon();
     }
 
     private void Move()
@@ -61,10 +61,10 @@ public class Player : MonoBehaviour
             v = 0;
         }
         
-        if(h == -1) playerDirection = PlayerDirection.left;
-        if(h == 1)  playerDirection = PlayerDirection.right;
         if(v == -1) playerDirection = PlayerDirection.down;
         if(v == 1)  playerDirection = PlayerDirection.up;
+        if(h == -1) playerDirection = PlayerDirection.left;
+        if(h == 1)  playerDirection = PlayerDirection.right;
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
         if(Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
@@ -107,7 +107,10 @@ public class Player : MonoBehaviour
 
     private void Weapon()
     {
-
+        for(int i = 0; i < weaponSlots.Length; i++)
+        {
+            weaponSlots[i].SetDirection(playerDirection);
+        }
     }
 
     private void OnDrawGizmos()
