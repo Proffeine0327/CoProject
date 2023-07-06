@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Dialogue;
 
+public enum PlayerDirection { left, right, down, up }
+
 public class Player : MonoBehaviour
 {
     private static Player instance;
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float steminaAdditiveAmount;
     [SerializeField] private float steminaSubtractAmount;
     [Header("Attack")]
+    [SerializeField] private Weapon[] weaponSlots;
+    [SerializeField] private bool[] weaponActive;
     [Header("Interact")]
     [SerializeField] private float interactRange;
     [SerializeField] private LayerMask interactLayer;
@@ -23,9 +27,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject handLight;
 
     private Rigidbody2D rb;
-    [SerializeField] private float curStemina;
-    private bool isRunning;
+    private PlayerDirection playerDirection;
+    private int curWeaponIndex;
+    private float curStemina;
     private float playerRotation;
+    private bool isRunning;
 
     private void Awake()
     {
@@ -54,7 +60,11 @@ public class Player : MonoBehaviour
             h = 0;
             v = 0;
         }
-        playerRotation = Mathf.Atan2(v, h) * Mathf.Rad2Deg - 90;
+        
+        if(h == -1) playerDirection = PlayerDirection.left;
+        if(h == 1)  playerDirection = PlayerDirection.right;
+        if(v == -1) playerDirection = PlayerDirection.down;
+        if(v == 1)  playerDirection = PlayerDirection.up;
 
         if(Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
         if(Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
@@ -68,9 +78,7 @@ public class Player : MonoBehaviour
         curStemina = Mathf.Clamp(curStemina, 0, maxStemina);
 
         rb.velocity = new Vector2(h, v).normalized * moveSpeed * (isRunning ? runSpeedRatio : 1);
-
-        if(h != 0 || v != 0)
-            handLight.transform.rotation = Quaternion.Euler(0, 0, playerRotation);
+        handLight.transform.rotation = Quaternion.Euler(0, 0, playerRotation);
     }
 
     private void Interact()
@@ -97,9 +105,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void Weapon()
     {
-        
+
     }
 
     private void OnDrawGizmos()
