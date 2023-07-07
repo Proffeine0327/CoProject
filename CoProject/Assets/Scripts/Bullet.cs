@@ -7,6 +7,11 @@ public class Bullet : MonoBehaviour
     private float speed;
     private Vector2 dir;
 
+    private void Start() 
+    {
+        Destroy(gameObject, 3f);
+    }
+
     public void Init(float speed, Vector2 direction)
     {
         this.speed = speed;

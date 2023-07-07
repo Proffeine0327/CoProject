@@ -2,14 +2,13 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using Dialogue;
 
 public enum PlayerDirection { left, right, down, up }
+public enum WeaponSelection { none, assault, pistol, knife }
 
 public class Player : MonoBehaviour
 {
-    private static Player instance;
+    public static Player Instance { get; private set; }
 
     [Header("Move")]
     [SerializeField] private float moveSpeed;
@@ -18,8 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float steminaAdditiveAmount;
     [SerializeField] private float steminaSubtractAmount;
     [Header("Attack")]
-    [SerializeField] private Weapon[] weaponSlots;
-    [SerializeField] private bool[] getWeapon;
+    [SerializeField] private Gun assault;
+    [SerializeField] private Gun pistol;
     [Header("Interact")]
     [SerializeField] private float interactRange;
     [SerializeField] private LayerMask interactLayer;
@@ -28,19 +27,43 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerDirection playerDirection;
-    private int curWeaponIndex = -1;
+    private WeaponSelection weaponSelection = WeaponSelection.none;
     private float curStemina;
     private bool isRunning;
+    private bool isAttacking;
+    private bool isMoving;
+    private bool hasAssault;
+    private bool hasPistol;
 
-    public void GetWeapon(int index) => getWeapon[index] = true;
+    public Gun CurrentGun
+    {
+        get
+        {
+            return weaponSelection switch
+            {
+                WeaponSelection.assault => assault,
+                WeaponSelection.pistol => pistol,
+                _ => null,
+            };
+        }
+    }
+
+    public void GetWeapon(WeaponSelection selection)
+    {
+        switch (selection)
+        {
+            case WeaponSelection.assault: hasAssault = true; break;
+            case WeaponSelection.pistol: hasPistol = true; break;
+            case WeaponSelection.knife: break;
+        }
+    }
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
 
         rb = GetComponent<Rigidbody2D>();
         curStemina = maxStemina;
-        getWeapon = new bool[weaponSlots.Length];
     }
 
     private void Update()
@@ -57,7 +80,8 @@ public class Player : MonoBehaviour
 
         if (
             SequenceManager.isPlayingSequence ||
-            AnnounceUI.isShowingAnnounce
+            AnnounceUI.isShowingAnnounce ||
+            isAttacking
         )
         {
             h = 0;
@@ -69,6 +93,8 @@ public class Player : MonoBehaviour
         if (h == -1) playerDirection = PlayerDirection.left;
         if (h == 1) playerDirection = PlayerDirection.right;
 
+        isMoving = h != 0 || v != 0;
+
         if (Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
         if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
 
@@ -77,17 +103,21 @@ public class Player : MonoBehaviour
             curStemina -= steminaSubtractAmount * Time.deltaTime;
             if (curStemina <= 0) isRunning = false;
         }
-        else curStemina += steminaAdditiveAmount * Time.deltaTime;
+        else
+        {
+            curStemina += steminaAdditiveAmount * Time.deltaTime;
+        }
+
         curStemina = Mathf.Clamp(curStemina, 0, maxStemina);
 
         rb.velocity = new Vector2(h, v).normalized * moveSpeed * (isRunning ? runSpeedRatio : 1);
 
-        switch(playerDirection)
+        switch (playerDirection)
         {
-            case PlayerDirection.left:  handLight.transform.rotation = Quaternion.Euler(0, 0, 90); break;
+            case PlayerDirection.left: handLight.transform.rotation = Quaternion.Euler(0, 0, 90); break;
             case PlayerDirection.right: handLight.transform.rotation = Quaternion.Euler(0, 0, -90); break;
-            case PlayerDirection.up:    handLight.transform.rotation = Quaternion.Euler(0, 0, 0); break;
-            case PlayerDirection.down:  handLight.transform.rotation = Quaternion.Euler(0, 0, 180); break;
+            case PlayerDirection.up: handLight.transform.rotation = Quaternion.Euler(0, 0, 0); break;
+            case PlayerDirection.down: handLight.transform.rotation = Quaternion.Euler(0, 0, 180); break;
         }
     }
 
@@ -117,24 +147,64 @@ public class Player : MonoBehaviour
 
     private void Weapon()
     {
-        for(int i = 0; i < weaponSlots.Length; i++) 
-        {
-            if(!getWeapon[i]) continue;
+        assault.gameObject.SetActive(weaponSelection is WeaponSelection.assault);
+        pistol.gameObject.SetActive(weaponSelection is WeaponSelection.pistol);
+        //knife
 
-            if(Input.GetKeyDown((KeyCode)49 + i))
-                if(curWeaponIndex == i) curWeaponIndex = -1;
-                else curWeaponIndex = i;
+        assault.SetDirection(playerDirection);
+        pistol.SetDirection(playerDirection);
+        //knife
+
+        if (SequenceManager.isPlayingSequence) return;
+        if (AnnounceUI.isShowingAnnounce) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && hasAssault) weaponSelection = weaponSelection is WeaponSelection.assault ? WeaponSelection.none : WeaponSelection.assault;
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasPistol) weaponSelection = weaponSelection is WeaponSelection.pistol ? WeaponSelection.none : WeaponSelection.pistol;
+        if (Input.GetKeyDown(KeyCode.Alpha3) /* && hasKnife */) weaponSelection = weaponSelection is WeaponSelection.knife ? WeaponSelection.none : WeaponSelection.knife;
+
+        if (Input.GetKey(KeyCode.A) && !isMoving)
+        {
+            switch (weaponSelection)
+            {
+                case WeaponSelection.assault:
+                    if (hasAssault && !assault.IsReloading)
+                    {
+                        assault.Attack();
+                        isAttacking = true;
+                    }
+                    break;
+                case WeaponSelection.pistol:
+                    if (hasPistol && !pistol.IsReloading)
+                    {
+                        pistol.Attack();
+                        isAttacking = true;
+                    }
+                    break;
+                case WeaponSelection.knife:
+                    break;
+            }
+        }
+        else
+        {
+            isAttacking = false;
         }
 
-        for (int i = 0; i < weaponSlots.Length; i++)
+        if (Input.GetKey(KeyCode.S))
         {
-            weaponSlots[i].gameObject.SetActive(i == curWeaponIndex);
-            if (i == curWeaponIndex) weaponSlots[i].SetDirection(playerDirection);
+            switch (weaponSelection)
+            {
+                case WeaponSelection.assault:
+                    if (hasAssault)
+                        assault.Reload();
+                    break;
+                case WeaponSelection.pistol:
+                    if (hasPistol)
+                        pistol.Reload();
+                    break;
+                case WeaponSelection.knife:
+                    break;
+            }
         }
-
-        if(curWeaponIndex == -1) return;
-        if(Input.GetKey(KeyCode.A)) weaponSlots[curWeaponIndex].Attack();
-        if(Input.GetKeyDown(KeyCode.S)) weaponSlots[curWeaponIndex].Reload();
     }
 
     private void OnDrawGizmos()
