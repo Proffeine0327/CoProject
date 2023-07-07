@@ -67,12 +67,12 @@ public class Gun : MonoBehaviour
             Instantiate(
                 bulletPrefeb, 
                 direction is PlayerDirection.left or PlayerDirection.right ? hSpawnPos.position : vSpawnPos.position, 
-                Quaternion.Euler(0, 0, rotation)
+                Quaternion.Euler(0, 0, rotation - 90)
                 ).GetComponent<Bullet>();
 
         bullet.Init(bulletSpeed, dir);
 
-        curAmmo--; 
+        curAmmo--;
         curShootTime = shootTime;
     }
 
