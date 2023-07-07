@@ -998,7 +998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd8afba1c05c0b4dbabf615d2f144d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrator: "\uC815 \uACFC\uC7A5"
+  narrator: "\uC815 \uC0AC\uC6D0"
   text: "\uBC14\uC058\uC9C0 \uC54A\uB2E4\uBA74, \uC9C0\uAE08 \uAC00\uBCF4\uB294\uAC74
     \uC5B4\uB54C\uC694?"
   type: 1

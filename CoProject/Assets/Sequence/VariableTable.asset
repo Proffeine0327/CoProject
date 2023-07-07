@@ -17,4 +17,4 @@ MonoBehaviour:
   - ToGoManager
   - IsNight
   - IsAlreadyGetGun
-  values: 00000000000000000000000000000000
+  values: 01000000020000000000000000000000

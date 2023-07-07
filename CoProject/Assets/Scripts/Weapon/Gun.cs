@@ -31,12 +31,12 @@ public class Gun : MonoBehaviour
     public Sprite UIDisplaySprite => uiDisplaySprite;
     public string UIDisplayType => uiDisplayType;
 
-    private void OnDisable() 
+    private void OnDisable()
     {
-        isReloading = false;    
+        isReloading = false;
     }
 
-    private void Start() 
+    private void Start()
     {
         curAmmo = maxAmmo;
     }
@@ -51,27 +51,28 @@ public class Gun : MonoBehaviour
             return;
         }
 
-        if(isSingleShot && !Input.GetKeyDown(KeyCode.A)) return;
-
-        Bullet bullet = null;
-
-        if (direction is PlayerDirection.left or PlayerDirection.right)
-            bullet = Instantiate(bulletPrefeb, hSpawnPos.position, Quaternion.identity).GetComponent<Bullet>();
-        if (direction is PlayerDirection.up or PlayerDirection.down)
-            bullet = Instantiate(bulletPrefeb, vSpawnPos.position, Quaternion.identity).GetComponent<Bullet>();
-
-        Vector2 dir = direction switch
+        if (isSingleShot && !Input.GetKeyDown(KeyCode.A)) return;
+        
+        float rotation = direction switch 
         {
-            PlayerDirection.left => Vector2.left,
-            PlayerDirection.right => Vector2.right,
-            PlayerDirection.up => Vector2.up,
-            PlayerDirection.down => Vector2.down,
-            _ => Vector2.zero
+            PlayerDirection.right => 0,
+            PlayerDirection.up => 90,
+            PlayerDirection.left => 180,
+            PlayerDirection.down => 270,
+            _ => 0
         };
+        rotation += Random.Range(-1.5f, 1.5f);
+        Vector2 dir = new(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad));
+        var bullet = 
+            Instantiate(
+                bulletPrefeb, 
+                direction is PlayerDirection.left or PlayerDirection.right ? hSpawnPos.position : vSpawnPos.position, 
+                Quaternion.Euler(0, 0, rotation)
+                ).GetComponent<Bullet>();
 
         bullet.Init(bulletSpeed, dir);
 
-        curAmmo--;
+        curAmmo--; 
         curShootTime = shootTime;
     }
 

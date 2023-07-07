@@ -135,8 +135,8 @@ MonoBehaviour:
   - {fileID: -7584799702853405884}
   rect:
     serializedVersion: 2
-    x: 304
-    y: -166
+    x: 256
+    y: -12
     width: 200
     height: 50
   normalStyle:
@@ -358,8 +358,8 @@ MonoBehaviour:
   nexts: []
   rect:
     serializedVersion: 2
-    x: 511
-    y: 135
+    x: 463
+    y: 289
     width: 200
     height: 50
   normalStyle:
@@ -556,8 +556,8 @@ MonoBehaviour:
   - {fileID: -8293486299764182018}
   rect:
     serializedVersion: 2
-    x: 304
-    y: 196
+    x: 256
+    y: 350
     width: 200
     height: 50
   normalStyle:
@@ -722,8 +722,8 @@ MonoBehaviour:
   - {fileID: 562058863028170800}
   rect:
     serializedVersion: 2
-    x: 303
-    y: 17
+    x: 255
+    y: 171
     width: 200
     height: 50
   normalStyle:
@@ -927,8 +927,8 @@ MonoBehaviour:
   - {fileID: -1135857425736549407}
   rect:
     serializedVersion: 2
-    x: 302
-    y: 252
+    x: 254
+    y: 406
     width: 200
     height: 50
   normalStyle:
@@ -1093,8 +1093,8 @@ MonoBehaviour:
   - {fileID: -8048057501300650343}
   rect:
     serializedVersion: 2
-    x: 511
-    y: 192
+    x: 463
+    y: 346
     width: 200
     height: 50
   normalStyle:
@@ -1294,8 +1294,8 @@ MonoBehaviour:
   - {fileID: -5717482986233709935}
   rect:
     serializedVersion: 2
-    x: 305
-    y: -109
+    x: 257
+    y: 45
     width: 200
     height: 50
   normalStyle:
@@ -1479,8 +1479,8 @@ MonoBehaviour:
   - {fileID: -2634496887123933589}
   rect:
     serializedVersion: 2
-    x: 512
-    y: 250
+    x: 464
+    y: 404
     width: 200
     height: 50
   normalStyle:
@@ -1633,7 +1633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playable: {fileID: 11400000, guid: 96ce12feccf386d4ab7f9a17575dd072, type: 2}
   variableTable: {fileID: 11400000, guid: c7a2aa9737dc1f241a6ca3b72fb808c9, type: 2}
-  currentSentence: {fileID: 1918685214915394262}
+  currentSentence: {fileID: -740397859019578742}
   sentences:
   - {fileID: 1918685214915394262}
   - {fileID: -6749562186541157915}
@@ -1704,8 +1704,8 @@ MonoBehaviour:
   - {fileID: 2356339189672376013}
   rect:
     serializedVersion: 2
-    x: 302
-    y: 136
+    x: 254
+    y: 290
     width: 200
     height: 50
   normalStyle:
@@ -1885,8 +1885,8 @@ MonoBehaviour:
   - {fileID: -523550085708924337}
   rect:
     serializedVersion: 2
-    x: 302
-    y: -227
+    x: 254
+    y: -73
     width: 200
     height: 50
   normalStyle:
@@ -2071,8 +2071,8 @@ MonoBehaviour:
   - {fileID: 2974173745212827257}
   rect:
     serializedVersion: 2
-    x: 305
-    y: -42
+    x: 257
+    y: 112
     width: 200
     height: 50
   normalStyle:
@@ -2236,8 +2236,8 @@ MonoBehaviour:
   - {fileID: -1966604287608054442}
   rect:
     serializedVersion: 2
-    x: 303
-    y: 77
+    x: 255
+    y: 231
     width: 200
     height: 50
   normalStyle:

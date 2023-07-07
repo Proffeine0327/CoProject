@@ -114,10 +114,10 @@ public class Player : MonoBehaviour
 
         switch (playerDirection)
         {
-            case PlayerDirection.left: handLight.transform.rotation = Quaternion.Euler(0, 0, 90); break;
-            case PlayerDirection.right: handLight.transform.rotation = Quaternion.Euler(0, 0, -90); break;
-            case PlayerDirection.up: handLight.transform.rotation = Quaternion.Euler(0, 0, 0); break;
-            case PlayerDirection.down: handLight.transform.rotation = Quaternion.Euler(0, 0, 180); break;
+            case PlayerDirection.left: handLight.transform.rotation = Quaternion.Euler(0, 0, -90); break;
+            case PlayerDirection.right: handLight.transform.rotation = Quaternion.Euler(0, 0, 90); break;
+            case PlayerDirection.up: handLight.transform.rotation = Quaternion.Euler(0, 0, 180); break;
+            case PlayerDirection.down: handLight.transform.rotation = Quaternion.Euler(0, 0, 0); break;
         }
     }
 
@@ -212,4 +212,4 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
-}
+    }
