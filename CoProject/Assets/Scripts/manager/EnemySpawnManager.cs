@@ -8,25 +8,18 @@ public class EnemySpawnManager : MonoBehaviour
 
     public static void ActiveEnemy(int index)
     {
-        foreach(var enemy in instance.preset[index].EnemyList) enemy.SetActive(true);
+        instance.presets[index].SetActive(true);
     }
 
     public static void DisableEnemy(int index)
     {
-        foreach(var enemy in instance.preset[index].EnemyList) enemy.SetActive(false);
+        instance.presets[index].SetActive(false);
     }
 
-    [SerializeField] private EnemyGroup[] preset;
+    [SerializeField] private GameObject[] presets;
 
     private void Awake()
     {
         instance = this;
     }
-}
-
-[System.Serializable]
-public class EnemyGroup
-{
-    [SerializeField] private GameObject[] enemyList;
-    public GameObject[] EnemyList => enemyList;
 }

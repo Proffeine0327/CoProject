@@ -17,4 +17,5 @@ MonoBehaviour:
   - ToGoManager
   - IsNight
   - IsAlreadyGetGun
-  values: 01000000020000000000000000000000
+  - IsEntryManagementRoom
+  values: 0100000002000000000000000000000000000000

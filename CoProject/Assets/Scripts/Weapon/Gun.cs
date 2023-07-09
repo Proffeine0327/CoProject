@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float reloadTime;
     [SerializeField] private float shootTime;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletDamage;
     [SerializeField] private bool isSingleShot;
     [Header("Ui")]
     [SerializeField] private Sprite uiDisplaySprite;
@@ -70,7 +71,7 @@ public class Gun : MonoBehaviour
                 Quaternion.Euler(0, 0, rotation - 90)
                 ).GetComponent<Bullet>();
 
-        bullet.Init(bulletSpeed, dir);
+        bullet.Init(bulletSpeed, dir, bulletDamage);
 
         curAmmo--;
         curShootTime = shootTime;

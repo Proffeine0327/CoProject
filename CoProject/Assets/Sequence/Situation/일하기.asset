@@ -45,8 +45,8 @@ MonoBehaviour:
   - {fileID: 8479959521378384636}
   rect:
     serializedVersion: 2
-    x: 77
-    y: 319
+    x: 79
+    y: 392
     width: 200
     height: 50
   normalStyle:
@@ -246,8 +246,8 @@ MonoBehaviour:
   - {fileID: -9064335826518277441}
   rect:
     serializedVersion: 2
-    x: 286
-    y: 268
+    x: 288
+    y: 341
     width: 200
     height: 50
   normalStyle:
@@ -412,8 +412,8 @@ MonoBehaviour:
   - {fileID: -4211683296227078529}
   rect:
     serializedVersion: 2
-    x: 286
-    y: 324
+    x: 288
+    y: 397
     width: 200
     height: 50
   normalStyle:
@@ -577,8 +577,8 @@ MonoBehaviour:
   - {fileID: -2198549652629502076}
   rect:
     serializedVersion: 2
-    x: 84
-    y: 31
+    x: 86
+    y: 104
     width: 200
     height: 50
   normalStyle:
@@ -742,8 +742,8 @@ MonoBehaviour:
   - {fileID: 7219127560265226181}
   rect:
     serializedVersion: 2
-    x: 288
-    y: 94
+    x: 290
+    y: 167
     width: 200
     height: 50
   normalStyle:
@@ -923,8 +923,8 @@ MonoBehaviour:
   - {fileID: 4308583007783818390}
   rect:
     serializedVersion: 2
-    x: 287
-    y: 211
+    x: 289
+    y: 284
     width: 200
     height: 50
   normalStyle:
@@ -1184,8 +1184,8 @@ MonoBehaviour:
   - {fileID: -2644907755319781856}
   rect:
     serializedVersion: 2
-    x: 510
-    y: 154
+    x: 512
+    y: 227
     width: 200
     height: 50
   normalStyle:
@@ -1427,8 +1427,8 @@ MonoBehaviour:
   - {fileID: -2480994213201362029}
   rect:
     serializedVersion: 2
-    x: 81
-    y: 151
+    x: 83
+    y: 224
     width: 200
     height: 50
   normalStyle:
@@ -1708,8 +1708,8 @@ MonoBehaviour:
   - {fileID: 7798395716691302407}
   rect:
     serializedVersion: 2
-    x: 73
-    y: 371
+    x: 75
+    y: 444
     width: 200
     height: 50
   normalStyle:
@@ -1909,8 +1909,8 @@ MonoBehaviour:
   - {fileID: 3530961941201932152}
   rect:
     serializedVersion: 2
-    x: 287
-    y: 370
+    x: 289
+    y: 443
     width: 200
     height: 50
   normalStyle:
@@ -2147,8 +2147,8 @@ MonoBehaviour:
   - {fileID: -4342170704799577629}
   rect:
     serializedVersion: 2
-    x: 82
-    y: 91
+    x: 84
+    y: 164
     width: 200
     height: 50
   normalStyle:
@@ -2352,7 +2352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrator: "\uB098"
-  text: "\uD0D5\uBE44\uC2E4\uC774\uB77C\uB3C4 \uAC00\uBCFC\uAE4C...\n"
+  text: "\uAD00\uB9AC\uC2E4\uC774\uB77C\uB3C4 \uAC00\uBCFC\uAE4C...\n"
   type: 1
   sprite: {fileID: 0}
   isPlayTimeline: 0
@@ -2364,8 +2364,8 @@ MonoBehaviour:
   - {fileID: -3584545705911703708}
   rect:
     serializedVersion: 2
-    x: 511
-    y: 93
+    x: 513
+    y: 166
     width: 200
     height: 50
   normalStyle:
@@ -2517,19 +2517,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   narrator: "\uB098"
-  text: "\uD0D5\uBE44\uC2E4\uB85C \uAC00\uBCF4\uC790."
+  text: "\uAD00\uB9AC\uC2E4\uB85C \uAC00\uBCF4\uC790."
   type: 1
   sprite: {fileID: 0}
   isPlayTimeline: 0
   betweenTime: {x: 0, y: 0}
   wrapMode: 0
-  methods: []
+  methods:
+  - classType: EnemySpawnManager
+    methodName: ActiveEnemy
+    openParameter: 1
+    parameters:
+    - paramType: 0
+      intValue: 0
+      floatValue: 0
+      stringValue: 
+      objectReferenceValue: {fileID: 0}
+      objectType: 
   passTime: 0
   nexts: []
   rect:
     serializedVersion: 2
-    x: 511
-    y: 213
+    x: 513
+    y: 286
     width: 200
     height: 50
   normalStyle:
@@ -2666,7 +2676,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  isSelected: 0
+  isSelected: 1
   target: {fileID: 11400000}
 --- !u!114 &5983624238459507400
 MonoBehaviour:
@@ -2729,8 +2739,8 @@ MonoBehaviour:
   - {fileID: 3545292484913639578}
   rect:
     serializedVersion: 2
-    x: 287
-    y: 153
+    x: 289
+    y: 226
     width: 200
     height: 50
   normalStyle:
@@ -2895,8 +2905,8 @@ MonoBehaviour:
   - {fileID: 5983624238459507400}
   rect:
     serializedVersion: 2
-    x: 78
-    y: 262
+    x: 80
+    y: 335
     width: 200
     height: 50
   normalStyle:
@@ -3080,8 +3090,8 @@ MonoBehaviour:
   - {fileID: -5252117839080011542}
   rect:
     serializedVersion: 2
-    x: 511
-    y: 36
+    x: 513
+    y: 109
     width: 200
     height: 50
   normalStyle:
@@ -3245,8 +3255,8 @@ MonoBehaviour:
   - {fileID: 2184113325995823464}
   rect:
     serializedVersion: 2
-    x: 287
-    y: 32
+    x: 289
+    y: 105
     width: 200
     height: 50
   normalStyle:
@@ -3447,8 +3457,8 @@ MonoBehaviour:
   - {fileID: -8926882279687877548}
   rect:
     serializedVersion: 2
-    x: 80
-    y: 209
+    x: 82
+    y: 282
     width: 200
     height: 50
   normalStyle:

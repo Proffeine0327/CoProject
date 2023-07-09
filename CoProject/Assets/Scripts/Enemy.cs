@@ -20,6 +20,11 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agnet;
 
+    public void Damage(float amount)
+    {
+        curHp -= amount;
+    }
+
     private void Awake() 
     {
         curHp = maxHp;
