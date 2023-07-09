@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    [Header("Hp")]
+    [SerializeField] private float maxHp;
     [Header("Move")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float runSpeedRatio;
@@ -29,11 +31,16 @@ public class Player : MonoBehaviour
     private PlayerDirection playerDirection;
     private WeaponSelection weaponSelection = WeaponSelection.none;
     private float curStemina;
+    [SerializeField] private float curHp;
     private bool isRunning;
     private bool isAttacking;
     private bool isMoving;
     private bool hasAssault;
     private bool hasPistol;
+    private bool isGameOver;
+
+    public float MaxHp => maxHp;
+    public float CurHp => curHp;
 
     public Gun CurrentGun
     {
@@ -46,6 +53,11 @@ public class Player : MonoBehaviour
                 _ => null,
             };
         }
+    }
+
+    public void Damage(float amount)
+    {
+        curHp -= amount;
     }
 
     public void GetWeapon(WeaponSelection selection)
@@ -64,13 +76,24 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         curStemina = maxStemina;
+        curHp = maxHp;
     }
 
     private void Update()
     {
+        Hp();
         Move();
         Interact();
         Weapon();
+    }
+
+    private void Hp()
+    {
+        if(curHp < 0)
+        {
+            //gameover
+            isGameOver = true;
+        }
     }
 
     private void Move()
